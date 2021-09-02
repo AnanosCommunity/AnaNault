@@ -344,12 +344,8 @@ function getAccountPublicKey(account) {
   return uint4ToHex(key_uint4);
 }
 
-function setPrefix(account, prefix = 'xrb') {
-  if (prefix === 'nano') {
-    return account.replace('xrb_', 'nano_');
-  } else {
-    return account.replace('nano_', 'xrb_');
-  }
+function setPrefix(account, prefix = 'ana') {
+  return account
 }
 
 /**

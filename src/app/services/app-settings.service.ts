@@ -37,7 +37,6 @@ export class AppSettingsService {
   settings: AppSettings = {
     language: null,
     displayDenomination: 'mnano',
-    // displayPrefix: 'xrb',
     walletStore: 'localStorage',
     displayCurrency: 'USD',
     defaultRepresentative: null,

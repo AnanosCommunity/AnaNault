@@ -228,7 +228,7 @@ export class SendComponent implements OnInit {
     );
 
     if (!this.addressBookMatch && this.toAccountID === environment.donationAddress) {
-      this.addressBookMatch = 'Nault Donations';
+      this.addressBookMatch = 'AnaNault Donations';
     }
 
     // const accountInfo = await this.walletService.walletApi.accountInfo(this.toAccountID);

@@ -13,7 +13,7 @@ const log = require('electron-log');
 let showUpdateErrors = false;
 let saveTimeout = null;
 let isDownloading = false;
-const nano_schemes = ['nano', 'nanorep', 'nanoseed', 'nanokey', 'nanosign', 'nanoprocess'];
+const nano_schemes = ['ana',  'anarep', 'anaseed', 'anakey', 'anasign', 'anaprocess'];
 
 /**
  * By default, the logger writes logs to the following locations:
@@ -108,7 +108,7 @@ class AppUpdater {
         type: 'info',
         buttons: ['Update', 'Ask Later'],
         title: 'New Version',
-        message: 'An update for Nault is available!',
+        message: 'An update for AnaNault is available!',
         detail: 'Do you want to download and install it?'
       }
 
@@ -139,13 +139,13 @@ class AppUpdater {
       if (!showUpdateErrors) {
         return;
       }
-      mainWindow.setTitle(`Nault - ${autoUpdater.currentVersion}`); // reset title
+      mainWindow.setTitle(`AnaNault - ${autoUpdater.currentVersion}`); // reset title
       showUpdateErrors = false; // disable errors
       const dialogOpts = {
         type: 'error',
         buttons: ['OK'],
         title: 'Update Error',
-        message: 'Something went wrong while downloading Nault.',
+        message: 'Something went wrong while downloading AnaNault.',
         detail: `You will be notified again on next start.\nMore details in the log at: ${logLocation}`
       }
 
@@ -208,7 +208,7 @@ function createWindow () {
   });
 
   mainWindow.webContents.on('did-finish-load', function () {
-    mainWindow.setTitle(`Nault - ${autoUpdater.currentVersion}`);
+    mainWindow.setTitle(`AnaNault - ${autoUpdater.currentVersion}`);
   });
 
   const menuTemplate = getApplicationMenu();
@@ -226,7 +226,7 @@ function sendStatusToWindow(progressObj) {
   // sending message to ipcRenderer can be done as well but not sure where and how to display it
   // using the title bar instead
   // mainWindow.webContents.send('downloading', Math.round(progressObj.percent));
-  mainWindow.setTitle(`Nault - ${autoUpdater.currentVersion} - Downloading Update: ${Math.round(progressObj.percent)} %`);
+  mainWindow.setTitle(`AnaNault - ${autoUpdater.currentVersion} - Downloading Update: ${Math.round(progressObj.percent)} %`);
 }
 
 // run only one app
@@ -249,7 +249,7 @@ if (!appLock) {
     checkForUpdates();
   });
 
-  // Refocus the window if the user attempts to open Nault while it is already open
+  // Refocus the window if the user attempts to open AnaNault while it is already open
   app.on('second-instance', (event, argv, workingDirectory) => {
     if (mainWindow) {
 
@@ -341,7 +341,7 @@ function getApplicationMenu() {
       role: 'help',
       submenu: [
         {
-          label: 'Nault Help Docs',
+          label: 'AnaNault Help Docs',
           click () { loadExternal('https://docs.nault.cc/'); }
         },
         {
@@ -355,15 +355,15 @@ function getApplicationMenu() {
         {type: 'separator'},
         {
           label: 'View GitHub',
-          click () { loadExternal('https://github.com/Nault/Nault'); }
+          click () { loadExternal('https://github.com/JeanOUINA/AnaNault'); }
         },
         {
           label: 'Submit a bug report',
-          click () { loadExternal('https://github.com/Nault/Nault/issues/new'); }
+          click () { loadExternal('https://github.com/JeanOUINA/AnaNault/issues/new'); }
         },
         {
           label: 'Release notes',
-          click () { loadExternal('https://github.com/Nault/Nault/releases'); }
+          click () { loadExternal('https://github.com/JeanOUINA/AnaNault/releases'); }
         },
         {type: 'separator'},
         {
@@ -378,7 +378,7 @@ function getApplicationMenu() {
 
   if (process.platform === 'darwin') {
     template.unshift({
-      label: 'Nault',
+      label: 'AnaNault',
       submenu: [
         {role: 'about'},
         {type: 'separator'},

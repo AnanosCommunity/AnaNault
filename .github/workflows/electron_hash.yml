@@ -142,8 +142,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.pre_build.outputs.output1 }} # This pulls ID from the Release Drafter step
-          asset_path: desktop-app/build/Nault-${{ needs.pre_build.outputs.output2 }}.${{ matrix.app_ext }}
-          asset_name: Nault-${{ needs.pre_build.outputs.output2 }}-Linux.${{ matrix.app_ext }}
+          asset_path: desktop-app/build/AnaNault-${{ needs.pre_build.outputs.output2 }}.${{ matrix.app_ext }}
+          asset_name: AnaNault-${{ needs.pre_build.outputs.output2 }}-Linux.${{ matrix.app_ext }}
           asset_content_type: application/octet-stream
 
       - name: Upload Binaries Mac
@@ -153,8 +153,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.pre_build.outputs.output1 }} # This pulls ID from the Release Drafter step
-          asset_path: desktop-app/build/Nault-${{ needs.pre_build.outputs.output2 }}.${{ matrix.app_ext }}
-          asset_name: Nault-${{ needs.pre_build.outputs.output2 }}-Mac.${{ matrix.app_ext }}
+          asset_path: desktop-app/build/AnaNault-${{ needs.pre_build.outputs.output2 }}.${{ matrix.app_ext }}
+          asset_name: AnaNault-${{ needs.pre_build.outputs.output2 }}-Mac.${{ matrix.app_ext }}
           asset_content_type: application/octet-stream
 
       - name: Upload Binaries Windows
@@ -164,8 +164,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.pre_build.outputs.output1 }} # This pulls ID from the Release Drafter step
-          asset_path: desktop-app/build/Nault Setup ${{ needs.pre_build.outputs.output2 }}.${{ matrix.app_ext }}
-          asset_name: Nault-Setup-${{ needs.pre_build.outputs.output2 }}-Windows.${{ matrix.app_ext }}
+          asset_path: desktop-app/build/AnaNault Setup ${{ needs.pre_build.outputs.output2 }}.${{ matrix.app_ext }}
+          asset_name: AnaNault-Setup-${{ needs.pre_build.outputs.output2 }}-Windows.${{ matrix.app_ext }}
           asset_content_type: application/octet-stream
 
       - name: Upload Checksums
