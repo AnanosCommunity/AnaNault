@@ -836,10 +836,10 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
       link: this.util.account.getAccountPublicKey(this.toAccountID),
     };
     this.blockHash = nanocurrency.hashBlock({
-      account: blockData.account,
+      account: blockData.account.replace(/^ana_/, "nano_"),
       link: blockData.link,
       previous: blockData.previous,
-      representative: blockData.representative,
+      representative: blockData.representative.replace(/^ana_/, "nano_"),
       balance: blockData.balance
     });
     console.log('Created block', blockData);
@@ -895,10 +895,10 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     };
 
     this.blockHashReceive = nanocurrency.hashBlock({
-      account: blockData.account,
+      account: blockData.account.replace(/^ana_/, "nano_"),
       link: blockData.link,
       previous: blockData.previous,
-      representative: blockData.representative,
+      representative: blockData.representative.replace(/^ana_/, "nano_"),
       balance: blockData.balance
     });
     console.log('Created block', blockData);
@@ -960,10 +960,10 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     };
 
     this.blockHash = nanocurrency.hashBlock({
-      account: blockData.account,
+      account: blockData.account.replace(/^ana_/, "nano_"),
       link: blockData.link,
       previous: blockData.previous,
-      representative: blockData.representative,
+      representative: blockData.representative.replace(/^ana_/, "nano_"),
       balance: blockData.balance
     });
 

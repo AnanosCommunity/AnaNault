@@ -140,7 +140,7 @@ export class SweeperComponent implements OnInit {
   }
 
   destinationChange(address) {
-    if (nanocurrency.checkAddress(address)) {
+    if (nanocurrency.checkAddress(address.replace(/^ana_/, "nano_"))) {
       this.validDestination = true;
     } else {
       this.validDestination = false;
@@ -249,15 +249,15 @@ export class SweeperComponent implements OnInit {
   // Process final send block
   async processSend(privKey, previous, sendCallback) {
     const pubKey = nanocurrency.derivePublicKey(privKey);
-    const address = nanocurrency.deriveAddress(pubKey, {useNanoPrefix: true});
+    const address = nanocurrency.deriveAddress(pubKey, {useNanoPrefix: true}).replace(/^nano_/, "ana_");
 
     // make an extra check on valid destination
-    if (this.validDestination && nanocurrency.checkAddress(this.destinationAccount)) {
+    if (this.validDestination && nanocurrency.checkAddress(this.destinationAccount.replace(/^ana_/, "nano_"))) {
       this.appendLog('Transfer started: ' + address);
       const work = await this.workPool.getWork(previous, 1); // send threshold
       // create the block with the work found
-      const block = nanocurrency.createBlock(privKey, {balance: '0', representative: this.representative,
-      work: work, link: this.destinationAccount, previous: previous});
+      const block = nanocurrency.createBlock(privKey, {balance: '0', representative: this.representative.replace(/^ana_/, "nano_"),
+      work: work, link: this.destinationAccount.replace(/^ana_/, "nano_"), previous: previous});
 
       // publish block for each iteration
       const data = await this.api.process(block.block, TxType.send);
@@ -303,7 +303,7 @@ export class SweeperComponent implements OnInit {
       }
       const work = await this.workPool.getWork(workInputHash, 1 / 64); // receive threshold
       // create the block with the work found
-      const block = nanocurrency.createBlock(this.privKey, {balance: this.adjustedBalance, representative: this.representative,
+      const block = nanocurrency.createBlock(this.privKey, {balance: this.adjustedBalance, representative: this.representative.replace(/^ana_/, "nano_"),
       work: work, link: key, previous: this.previous});
       
       // new previous
@@ -405,7 +405,7 @@ export class SweeperComponent implements OnInit {
     }
 
     this.pubKey = nanocurrency.derivePublicKey(privKey);
-    const address = nanocurrency.deriveAddress(this.pubKey, {useNanoPrefix: true});
+    const address = nanocurrency.deriveAddress(this.pubKey, {useNanoPrefix: true}).replace(/^nano_/, "ana_");
 
     // get account info required to build the block
     let balance = 0; // balance will be 0 if open block

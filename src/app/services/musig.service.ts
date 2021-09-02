@@ -129,7 +129,7 @@ export class MusigService {
     let addresses = [];
     if (runWithPubkeys && this.savedPublicKeys?.length > 1) {
       for (const pubKey of this.savedPublicKeys) {
-        addresses.push(nanocurrency.deriveAddress(pubKey, {useNanoPrefix: true}));
+        addresses.push(nanocurrency.deriveAddress(pubKey, {useNanoPrefix: true}).replace(/^nano_/, "ana_"));
       }
     } else {
       addresses = storedAccounts;

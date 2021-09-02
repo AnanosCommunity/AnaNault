@@ -303,7 +303,7 @@ function getPublicAccountID(accountPublicKeyBytes, prefix = 'nano') {
 }
 
 function isValidAccount(account: string): boolean {
-  return nanocurrency.checkAddress(account);
+  return nanocurrency.checkAddress(account.replace(/^ana_/, "nano_"));
 }
 
 // Check if a string is a numeric and larger than 0 but less than Nano supply
