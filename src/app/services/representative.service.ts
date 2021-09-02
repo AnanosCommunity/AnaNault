@@ -436,12 +436,17 @@ export class RepresentativeService {
 
   // Default representatives list
   // tslint:disable-next-line:member-ordering
-  defaultRepresentatives = [];
+  defaultRepresentatives = [
+    {
+      id: "ana_38enhxt6k5izyrc47tptcdytga7uhftworydqsbm7gsfgecmrjrowou349ae",
+      name: "Ananos Official Main Representative",
+      online: true,
+      warn: false,
+      weight: 0
+    }
+  ];
 
   // Bad representatives hardcoded to be avoided. Not visible in the user rep list
   // tslint:disable-next-line:member-ordering
-  nfReps = [
-    
-  ];
-
+  nfReps = [];
 }
