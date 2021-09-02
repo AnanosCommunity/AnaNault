@@ -69,10 +69,10 @@ export class AppSettingsService {
     {
       name: 'Bunker Ananos',
       value: 'bunker-ananos',
-      api: 'http://le-bunker.duckdns.org:7076/',
-      ws: 'ws://le-bunker.duckdns.org:7078/',
+      api: 'https://ananos.lightcord.org/http',
+      ws: 'wss://ananos.lightcord.org/ws',
       auth: null,
-      shouldRandom: false,
+      shouldRandom: true,
     },
     {
       name: 'Custom',
