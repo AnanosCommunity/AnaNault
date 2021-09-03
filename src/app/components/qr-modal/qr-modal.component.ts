@@ -63,11 +63,11 @@ export class QrModalComponent implements OnInit {
     } else if (resultString.length === 128) {
       // includes deterministic R value material which we ignore
       resultString = resultString.substring(0, 64);
-      if (this.util.nano.isValidHash(resultString)) {
+      if (this.util.ana.isValidHash(resultString)) {
         type = 'hash';
         content = resultString;
       }
-    } else if (this.util.nano.isValidHash(resultString)) {
+    } else if (this.util.ana.isValidHash(resultString)) {
       type = 'hash';
       content = resultString;
     } else if (this.nano_scheme.test(resultString)) {
@@ -77,7 +77,7 @@ export class QrModalComponent implements OnInit {
 
       if (['ana:', 'anarep:'].includes(url.protocol) && this.util.account.isValidAccount(url.pathname)) {
         type = 'account';
-      } else if (['anaseed:', 'anakey:'].includes(url.protocol) && this.util.nano.isValidHash(url.pathname)) {
+      } else if (['anaseed:', 'anakey:'].includes(url.protocol) && this.util.ana.isValidHash(url.pathname)) {
         type = 'hash';
       }
     } else {

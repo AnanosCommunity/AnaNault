@@ -249,7 +249,7 @@ export class SignComponent implements OnInit {
           return this.notificationService.sendError(`Meaningless block. The balance and representative are unchanged!`, {length: 0});
         }
 
-        this.amount = this.util.nano.rawToMnano(this.rawAmount).toString(10);
+        this.amount = this.util.ana.rawToAna(this.rawAmount).toString(10);
 
         this.prepareTransaction();
       } else if (!this.previousBlock && this.verifyBlock(this.currentBlock)) {
@@ -268,7 +268,7 @@ export class SignComponent implements OnInit {
           return this.notificationService.sendError(`Only OPEN block is currently supported when previous block is missing`, {length: 0});
         }
 
-        this.amount = this.util.nano.rawToMnano(this.rawAmount).toString(10);
+        this.amount = this.util.ana.rawToAna(this.rawAmount).toString(10);
         this.prepareTransaction();
       } else {
         return;
@@ -281,7 +281,7 @@ export class SignComponent implements OnInit {
     // Extract block hash (used with multisig)
     const block: StateBlock = {account: this.currentBlock.account, link: this.currentBlock.link, previous: this.currentBlock.previous,
       representative: this.currentBlock.representative, balance: this.currentBlock.balance, signature: null, work: null};
-    this.blockHash = this.util.hex.fromUint8(this.util.nano.hashStateBlock(block));
+    this.blockHash = this.util.hex.fromUint8(this.util.ana.hashStateBlock(block));
 
     this.addressBookService.loadAddressBook();
 
@@ -330,8 +330,8 @@ export class SignComponent implements OnInit {
     if (this.util.account.isValidAccount(block.account) &&
       this.util.account.isValidAccount(block.representative) &&
       this.util.account.isValidAmount(block.balance) &&
-      this.util.nano.isValidHash(block.previous) &&
-      this.util.nano.isValidHash(block.link)) {
+      this.util.ana.isValidHash(block.previous) &&
+      this.util.ana.isValidHash(block.link)) {
       return true;
     } else {
       this.notificationService.sendError(`The provided blocks contain invalid values!`, {length: 0});
@@ -342,7 +342,7 @@ export class SignComponent implements OnInit {
   verifyBlockHash(currentBlock: StateBlock, previousBlock: StateBlock) {
     const block: StateBlock = {account: previousBlock.account, link: previousBlock.link, previous: previousBlock.previous,
       representative: previousBlock.representative, balance: previousBlock.balance, signature: null, work: null};
-    const previousHash = this.util.hex.fromUint8(this.util.nano.hashStateBlock(block));
+    const previousHash = this.util.hex.fromUint8(this.util.ana.hashStateBlock(block));
     if (!currentBlock.previous || previousHash !== currentBlock.previous) {
       this.notificationService.sendError(`The hash of the previous block does not match the frontier in the new block!`, {length: 0});
     }
@@ -422,7 +422,7 @@ export class SignComponent implements OnInit {
   async prepareTransaction() {
     // Determine fiat value of the amount (if not offline mode)
     if (this.settings.settings.serverAPI) {
-      this.amountFiat = this.util.nano.rawToMnano(this.rawAmount).times(this.price.price.lastPrice).toNumber();
+      this.amountFiat = this.util.ana.rawToAna(this.rawAmount).times(this.price.price.lastPrice).toNumber();
     }
 
     this.fromAddressBook = this.addressBookService.getAccountName(this.fromAccountID);
@@ -494,7 +494,7 @@ export class SignComponent implements OnInit {
         return this.notificationService.sendError('The private keys does not match the multisig account you want to sign!', {length: 0});
       }
       // Check the given signature format
-      if (!this.util.nano.isValidSignature(signature)) {
+      if (!this.util.ana.isValidSignature(signature)) {
         return this.notificationService.sendError('The multi-signature was invalid!', {length: 0});
       }
       block.signature = signature;
@@ -666,7 +666,7 @@ export class SignComponent implements OnInit {
     this.validIndex = true;
     if (this.util.string.isNumeric(index) && index % 1 === 0) {
       index = parseInt(index, 10);
-      if (!this.util.nano.isValidIndex(index)) {
+      if (!this.util.ana.isValidIndex(index)) {
         this.validIndex = false;
       }
       if (index > INDEX_MAX) {
@@ -745,7 +745,7 @@ export class SignComponent implements OnInit {
   checkMasterKey(key) {
     // validate nano seed
     if (key.length === 64) {
-      if (this.util.nano.isValidSeed(key)) {
+      if (this.util.ana.isValidSeed(key)) {
         return 'nano_seed';
       }
     }
@@ -819,7 +819,7 @@ export class SignComponent implements OnInit {
   privkeyChangeMulti(input) {
     const privKey = this.convertPrivateKey(input);
     if (privKey !== null) {
-      if (this.util.nano.isValidHash(privKey)) {
+      if (this.util.ana.isValidHash(privKey)) {
         this.validPrivkey = true;
         this.privateKey = privKey;
         this.signatureMessage = '';
@@ -964,11 +964,11 @@ export class SignComponent implements OnInit {
     const hashFull = hashString.substring(2);
     let valid = true;
     if (hashFull.length === 64) {
-      if (!this.util.nano.isValidHash(hashFull)) {
+      if (!this.util.ana.isValidHash(hashFull)) {
         valid = false;
       }
     } else if (hashFull.length === 128) {
-      if (!this.util.nano.isValidHash(hashFull.substring(0, 64)) || !this.util.nano.isValidHash(hashFull.substring(64, 128))) {
+      if (!this.util.ana.isValidHash(hashFull.substring(0, 64)) || !this.util.ana.isValidHash(hashFull.substring(64, 128))) {
         valid = false;
       }
     } else {

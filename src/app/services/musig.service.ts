@@ -198,10 +198,10 @@ export class MusigService {
     let multisigAccount = '';
     // Stage 0 (init)
     if (!this.musigStagePtr) {
-      if (!this.util.nano.isValidHash(privateKey)) {
+      if (!this.util.ana.isValidHash(privateKey)) {
         throw new Error('Invalid private key');
       }
-      if (!this.util.nano.isValidHash(blockHash)) {
+      if (!this.util.ana.isValidHash(blockHash)) {
         throw new Error('Invalid block hash');
       }
       const outPtr = this.wasm.musig_malloc(65);

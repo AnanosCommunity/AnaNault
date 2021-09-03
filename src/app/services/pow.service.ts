@@ -218,7 +218,7 @@ export class PowService {
    * Actual PoW functions
    */
   async getHashServer(hash, multiplier, workServer = '') {
-    const newThreshold = this.util.nano.difficultyFromMultiplier(multiplier, baseThreshold);
+    const newThreshold = this.util.ana.difficultyFromMultiplier(multiplier, baseThreshold);
     const serverString = workServer === '' ? 'external' : 'custom';
     console.log('Generating work with multiplier ' + multiplier + ' at threshold ' +
       newThreshold + ' using ' + serverString + ' server for hash: ', hash);
@@ -267,7 +267,7 @@ export class PowService {
     */
 
     // calculate threshold from multiplier
-    const newThreshold = this.util.nano.difficultyFromMultiplier(multiplier, baseThreshold);
+    const newThreshold = this.util.ana.difficultyFromMultiplier(multiplier, baseThreshold);
     const work = () => new Promise<void>((resolve, reject) => {
       this.cpuWorkerResolve = resolve;
       this.cpuWorkerReject = reject;
@@ -305,7 +305,7 @@ export class PowService {
    */
   getHashWebGL(hash, multiplier) {
     this.checkPowProcessLength(); // start alert timer
-    const newThreshold = this.util.nano.difficultyFromMultiplier(multiplier, baseThreshold);
+    const newThreshold = this.util.ana.difficultyFromMultiplier(multiplier, baseThreshold);
     console.log('Generating work with multiplier ' + multiplier + ' at threshold ' + newThreshold + ' using WebGL for hash: ', hash);
 
     const response = this.getDeferredPromise();

@@ -23,7 +23,7 @@ export class DeeplinkService {
       // Got address, routing to send...
       this.router.navigate(['send'], {queryParams: {to: deeplink}});
 
-    } else if (this.util.nano.isValidSeed(deeplink)) {
+    } else if (this.util.ana.isValidSeed(deeplink)) {
       // Seed
       this.handleSeed(deeplink);
 
@@ -45,7 +45,7 @@ export class DeeplinkService {
         const amount = url.searchParams.get('amount');
         this.router.navigate(['send'], { queryParams: {
           to: url.pathname,
-          amount: amount ? this.util.nano.rawToMnano(amount) : null
+          amount: amount ? this.util.ana.rawToAna(amount) : null
         }});
 
       } else if (url.protocol === 'anarep:' && this.util.account.isValidAccount(url.pathname)) {
@@ -56,10 +56,10 @@ export class DeeplinkService {
           representative: url.pathname
         }});
 
-      } else if (url.protocol === 'anaseed:' && this.util.nano.isValidSeed(url.pathname)) {
+      } else if (url.protocol === 'anaseed:' && this.util.ana.isValidSeed(url.pathname)) {
         // Seed
         this.handleSeed(url.pathname);
-      } else if (url.protocol === 'anakey:' && this.util.nano.isValidHash(url.pathname)) {
+      } else if (url.protocol === 'anakey:' && this.util.ana.isValidHash(url.pathname)) {
         // Private key
         this.handlePrivateKey(url.pathname);
       } else if (url.protocol === 'anasign:') {

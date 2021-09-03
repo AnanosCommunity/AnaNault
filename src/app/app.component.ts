@@ -297,7 +297,7 @@ export class AppComponent implements OnInit {
       return;
     }
 
-    const isValidBlockHash = this.util.nano.isValidHash(searchData);
+    const isValidBlockHash = this.util.ana.isValidHash(searchData);
 
     if (isValidBlockHash === true) {
       const blockHash = searchData.toUpperCase();

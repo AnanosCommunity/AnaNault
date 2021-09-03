@@ -194,13 +194,13 @@ export class ReceiveComponent implements OnInit, OnDestroy {
       this.changeQRAmount();
       return;
     }
-    const rawAmount = this.util.nano.mnanoToRaw(this.amountNano || 0);
+    const rawAmount = this.util.ana.anaToRaw(this.amountNano || 0);
 
     // This is getting hacky, but if their currency is bitcoin, use 6 decimals, if it is not, use 2
     const precision = this.settings.settings.displayCurrency === 'BTC' ? 1000000 : 100;
 
     // Determine fiat value of the amount
-    const fiatAmount = this.util.nano.rawToMnano(rawAmount).times(this.price.price.lastPrice)
+    const fiatAmount = this.util.ana.rawToAna(rawAmount).times(this.price.price.lastPrice)
       .times(precision).floor().div(precision).toNumber();
 
     this.amountFiat = fiatAmount.toString();
@@ -214,12 +214,10 @@ export class ReceiveComponent implements OnInit, OnDestroy {
       this.changeQRAmount();
       return;
     }
-    const rawAmount = this.util.nano.mnanoToRaw(new BigNumber(this.amountFiat).div(this.price.price.lastPrice));
-    const nanoVal = this.util.nano.rawToNano(rawAmount).floor();
-    const rawRounded = this.util.nano.nanoToRaw(nanoVal);
-    const nanoAmount = this.util.nano.rawToMnano(rawRounded);
+    const anaAmount = new BigNumber(this.amountFiat).div(this.price.price.lastPrice).div(100).floor().times(100)
+    const rawRounded = this.util.ana.anaToRaw(anaAmount)
 
-    this.amountNano = nanoAmount.toFixed();
+    this.amountNano = anaAmount.toFixed();
     this.changeQRAmount(rawRounded.toFixed());
     this.validateNanoAmount();
   }

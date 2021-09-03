@@ -124,7 +124,7 @@ export class RepresentativeService {
     const onlineReps = await this.getOnlineRepresentatives();
     const quorum = await this.api.confirmationQuorum();
 
-    const online_stake_total = quorum ? this.util.nano.rawToMnano(quorum.online_stake_total) : null;
+    const online_stake_total = quorum ? this.util.ana.rawToAna(quorum.online_stake_total) : null;
     this.onlineStakeTotal = online_stake_total ? new BigNumber(online_stake_total) : null;
 
     const allReps = [];
@@ -135,7 +135,7 @@ export class RepresentativeService {
       const knownRep = this.getRepresentative(representative.account);
       const knownRepNinja = await this.ninja.getAccount(representative.account);
 
-      const nanoWeight = this.util.nano.rawToMnano(representative.weight || 0);
+      const nanoWeight = this.util.ana.rawToAna(representative.weight || 0);
       const percent = this.onlineStakeTotal ? nanoWeight.div(this.onlineStakeTotal).times(100) : new BigNumber(0);
 
       const repStatus: RepresentativeStatus = {

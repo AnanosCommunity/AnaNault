@@ -47,9 +47,9 @@ export class ConfigureAppComponent implements OnInit {
   selectedLanguage = this.languages[0].id;
 
   denominations = [
-    { name: 'NANO', value: 'mnano' },
-    { name: 'knano', value: 'knano' },
-    { name: 'nano', value: 'nano' },
+    { name: 'mana', value: 'mana' },
+    { name: 'kana', value: 'kana' },
+    { name: 'ana', value: 'ana' }
   ];
   selectedDenomination = this.denominations[0].value;
 
@@ -230,8 +230,8 @@ export class ConfigureAppComponent implements OnInit {
 
     try {
       const quorumData = await this.api.confirmationQuorum();
-      this.peersStakeReq = quorumData ? Number(this.util.nano.rawToMnano(quorumData.quorum_delta)).toLocaleString('en-US') : null;
-      this.peersStakeTotal = quorumData ? Number(this.util.nano.rawToMnano(quorumData.peers_stake_total)).toLocaleString('en-US') : null;
+      this.peersStakeReq = quorumData ? Number(this.util.ana.rawToAna(quorumData.quorum_delta)).toLocaleString('en-US') : null;
+      this.peersStakeTotal = quorumData ? Number(this.util.ana.rawToAna(quorumData.peers_stake_total)).toLocaleString('en-US') : null;
     } catch {console.warn('Failed to get node stats: confirmation quorum'); }
 
     try {

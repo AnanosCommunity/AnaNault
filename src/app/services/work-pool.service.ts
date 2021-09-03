@@ -63,7 +63,7 @@ export class WorkPoolService {
 
     try {
       if (cached && cached.work &&
-          this.util.nano.validateWork(hash, this.util.nano.difficultyFromMultiplier(multiplier, baseThreshold), cached.work)) {
+          this.util.ana.validateWork(hash, this.util.ana.difficultyFromMultiplier(multiplier, baseThreshold), cached.work)) {
         console.log('Using cached work: ' + cached.work);
         return cached.work;
       }

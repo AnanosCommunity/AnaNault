@@ -65,13 +65,13 @@ export class UtilService {
     isValidNanoAmount: isValidNanoAmount,
     isValidAmount: isValidAmount,
   };
-  nano = {
-    mnanoToRaw: mnanoToRaw,
-    knanoToRaw: knanoToRaw,
-    nanoToRaw: nanoToRaw,
-    rawToMnano: rawToMnano,
-    rawToKnano: rawToKnano,
-    rawToNano: rawToNano,
+  ana = {
+    anaToRaw: anaToRaw,
+    kanaToRaw: kanaToRaw,
+    manaToRaw: manaToRaw,
+    rawToAna: rawToAna,
+    rawToKana: rawToKana,
+    rawToMana: rawToMana,
     hashStateBlock: hashStateBlock,
     isValidSeed: isValidSeed,
     isValidHash: isValidHash,
@@ -311,7 +311,7 @@ function isValidNanoAmount(val: string) {
   // numerics and last character is not a dot and number of dots is 0 or 1
   const isnum = /^-?\d*\.?\d*$/.test(val);
   if (isnum && String(val).slice(-1) !== '.') {
-    if (val !== '' && mnanoToRaw(val).gte(1) && nanocurrency.checkAmount(mnanoToRaw(val).toString(10))) {
+    if (val !== '' && anaToRaw(val).gte(1) && nanocurrency.checkAmount(anaToRaw(val).toString(10))) {
       return true;
     } else {
       return false;
@@ -332,7 +332,7 @@ function getAccountPublicKey(account) {
   }
   const account_crop = account.length === 64 ? account.substring(4, 64) : account.substring(5, 65);
   const isValid = /^[13456789abcdefghijkmnopqrstuwxyz]+$/.test(account_crop);
-  if (!isValid) throw new Error(`Invalid NANO account`);
+  if (!isValid) throw new Error(`Invalid ANA account`);
 
   const key_uint4 = array_crop(uint5ToUint4(stringToUint5(account_crop.substring(0, 52))));
   const hash_uint4 = uint5ToUint4(stringToUint5(account_crop.substring(52, 60)));
@@ -351,26 +351,23 @@ function setPrefix(account, prefix = 'ana') {
 /**
  * Conversion functions
  */
-const mnano = 1000000000000000000000000000000;
-const knano = 1000000000000000000000000000;
-const nano  = 1000000000000000000000000;
-function mnanoToRaw(value) {
-  return new BigNumber(value).times(mnano);
+function anaToRaw(value){
+  return new BigNumber(value).shift(28);
 }
-function knanoToRaw(value) {
-  return new BigNumber(value).times(knano);
+function kanaToRaw(value){
+  return new BigNumber(value).shift(31);
 }
-function nanoToRaw(value) {
-  return new BigNumber(value).times(nano);
+function manaToRaw(value){
+  return new BigNumber(value).shift(34);
 }
-function rawToMnano(value) {
-  return new BigNumber(value).div(mnano);
+function rawToAna(value){
+  return new BigNumber(value).shift(-18);
 }
-function rawToKnano(value) {
-  return new BigNumber(value).div(knano);
+function rawToKana(value){
+  return new BigNumber(value).shift(-31);
 }
-function rawToNano(value) {
-  return new BigNumber(value).div(nano);
+function rawToMana(value){
+  return new BigNumber(value).shift(-34);
 }
 
 /**
@@ -527,13 +524,13 @@ const util = {
     isValidNanoAmount: isValidNanoAmount,
     isValidAmount: isValidNanoAmount,
   },
-  nano: {
-    mnanoToRaw: mnanoToRaw,
-    knanoToRaw: knanoToRaw,
-    nanoToRaw: nanoToRaw,
-    rawToMnano: rawToMnano,
-    rawToKnano: rawToKnano,
-    rawToNano: rawToNano,
+  ana: {
+    anaToRaw: anaToRaw,
+    kanaToRaw: kanaToRaw,
+    manaToRaw: manaToRaw,
+    rawToAna: rawToAna,
+    rawToKana: rawToKana,
+    rawToMana: rawToMana,
     hashStateBlock: hashStateBlock,
     isValidSeed: isValidSeed,
     isValidHash: isValidHash,

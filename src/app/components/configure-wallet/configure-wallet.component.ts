@@ -219,7 +219,7 @@ export class ConfigureWalletComponent implements OnInit {
       if (this.selectedImportOption === 'mnemonic' || this.selectedImportOption === 'seed') {
         if (this.selectedImportOption === 'seed') {
           const existingSeed = this.importSeedModel.trim();
-          if (existingSeed.length !== 64 || !this.util.nano.isValidSeed(existingSeed)) return this.notifications.sendError(`Seed is invalid, double check it!`);
+          if (existingSeed.length !== 64 || !this.util.ana.isValidSeed(existingSeed)) return this.notifications.sendError(`Seed is invalid, double check it!`);
           this.importSeed = existingSeed;
         } else if (this.selectedImportOption === 'mnemonic') {
           // Clean the value by trimming it and removing newlines
@@ -231,7 +231,7 @@ export class ConfigureWalletComponent implements OnInit {
           // Try and decode the mnemonic
           try {
             const newSeed = bip39.mnemonicToEntropy(mnemonic);
-            if (!newSeed || newSeed.length !== 64 || !this.util.nano.isValidSeed(newSeed)) return this.notifications.sendError(`Mnemonic is invalid, double check it!`);
+            if (!newSeed || newSeed.length !== 64 || !this.util.ana.isValidSeed(newSeed)) return this.notifications.sendError(`Mnemonic is invalid, double check it!`);
             this.importSeed = newSeed.toUpperCase(); // Force uppercase, for consistency
           } catch (err) {
             return this.notifications.sendError(`Unable to decode mnemonic, double check it!`);
@@ -253,10 +253,10 @@ export class ConfigureWalletComponent implements OnInit {
         if (this.isExpanded && this.keyString.length === 128) {
           // includes deterministic R value material which we ignore
           this.keyString = this.keyString.substring(0, 64);
-          if (!this.util.nano.isValidSeed(this.keyString)) {
+          if (!this.util.ana.isValidSeed(this.keyString)) {
             return this.notifications.sendError(`Private key is invalid, double check it!`);
           }
-        } else if (this.keyString.length !== 64 || !this.util.nano.isValidSeed(this.keyString)) {
+        } else if (this.keyString.length !== 64 || !this.util.ana.isValidSeed(this.keyString)) {
           return this.notifications.sendError(`Private key is invalid, double check it!`);
         }
       } else if (this.selectedImportOption === 'bip39-mnemonic') {
@@ -420,7 +420,7 @@ export class ConfigureWalletComponent implements OnInit {
     let invalid = false;
     if (this.util.string.isNumeric(index) && index % 1 === 0) {
       index = parseInt(index, 10);
-      if (!this.util.nano.isValidIndex(index)) {
+      if (!this.util.ana.isValidIndex(index)) {
         invalid = true;
       }
       if (index > INDEX_MAX) {

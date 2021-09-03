@@ -34,9 +34,9 @@ export class SendComponent implements OnInit {
   addressBookMatch = '';
 
   amounts = [
-    { name: 'NANO', shortName: 'NANO', value: 'mnano' },
-    { name: 'knano', shortName: 'knano', value: 'knano' },
-    { name: 'nano', shortName: 'nano', value: 'nano' },
+    { name: 'MANA', shortName: 'mana', value: 'mana' },
+    { name: 'KANA', shortName: 'kana', value: 'kana' },
+    { name: 'ANA', shortName: 'ana', value: 'ana' },
   ];
   selectedAmount = this.amounts[0];
 
@@ -116,7 +116,7 @@ export class SendComponent implements OnInit {
     if ( params && params.amount && !isNaN(params.amount) ) {
       const amountAsRaw =
         new BigNumber(
-          this.util.nano.mnanoToRaw(
+          this.util.ana.anaToRaw(
             new BigNumber(params.amount)
           )
         );
@@ -124,7 +124,7 @@ export class SendComponent implements OnInit {
       this.amountExtraRaw = amountAsRaw.mod(this.nano).floor();
 
       this.amount =
-        this.util.nano.rawToMnano(
+        this.util.ana.rawToAna(
           amountAsRaw.minus(this.amountExtraRaw)
         ).toNumber();
 
@@ -172,7 +172,7 @@ export class SendComponent implements OnInit {
     const precision = this.settings.settings.displayCurrency === 'BTC' ? 1000000 : 100;
 
     // Determine fiat value of the amount
-    const fiatAmount = this.util.nano.rawToMnano(rawAmount).times(this.price.price.lastPrice)
+    const fiatAmount = this.util.ana.rawToAna(rawAmount).times(this.price.price.lastPrice)
       .times(precision).floor().div(precision).toNumber();
 
     this.amountFiat = fiatAmount;
@@ -185,9 +185,9 @@ export class SendComponent implements OnInit {
       return;
     }
     if (!this.util.string.isNumeric(this.amountFiat)) return;
-    const rawAmount = this.util.nano.mnanoToRaw(new BigNumber(this.amountFiat).div(this.price.price.lastPrice));
-    const nanoVal = this.util.nano.rawToNano(rawAmount).floor();
-    const nanoAmount = this.getAmountValueFromBase(this.util.nano.nanoToRaw(nanoVal));
+    const rawAmount = this.util.ana.anaToRaw(new BigNumber(this.amountFiat).div(this.price.price.lastPrice));
+    const nanoVal = this.util.ana.rawToNano(rawAmount).floor();
+    const nanoAmount = this.getAmountValueFromBase(this.util.ana.nanoToRaw(nanoVal));
 
     this.amount = nanoAmount.toNumber();
   }
@@ -299,7 +299,7 @@ export class SendComponent implements OnInit {
       return this.notificationService.sendWarning(`From and to account are required`);
     }
     if (!this.validateAmount()) {
-      return this.notificationService.sendWarning(`Invalid NANO Amount`);
+      return this.notificationService.sendWarning(`Invalid ANA Amount`);
     }
 
     this.preparingTransaction = true;
@@ -328,14 +328,14 @@ export class SendComponent implements OnInit {
       return this.notificationService.sendWarning(`Amount is invalid`);
     }
     if (from.balanceBN.minus(rawAmount).lessThan(0)) {
-      return this.notificationService.sendError(`From account does not have enough NANO`);
+      return this.notificationService.sendError(`From account does not have enough ANA`);
     }
 
     // Determine a proper raw amount to show in the UI, if a decimal was entered
     this.amountExtraRaw = this.rawAmount.mod(this.nano);
 
     // Determine fiat value of the amount
-    this.amountFiat = this.util.nano.rawToMnano(rawAmount).times(this.price.price.lastPrice).toNumber();
+    this.amountFiat = this.util.ana.rawToAna(rawAmount).times(this.price.price.lastPrice).toNumber();
 
     this.fromAddressBook = (
         this.addressBookService.getAccountName(this.fromAccountID)
@@ -406,8 +406,8 @@ export class SendComponent implements OnInit {
 
     this.amountExtraRaw = walletAccount.balanceRaw;
 
-    const nanoVal = this.util.nano.rawToNano(walletAccount.balance).floor();
-    const maxAmount = this.getAmountValueFromBase(this.util.nano.nanoToRaw(nanoVal));
+    const nanoVal = this.util.ana.rawToNano(walletAccount.balance).floor();
+    const maxAmount = this.getAmountValueFromBase(this.util.ana.nanoToRaw(nanoVal));
     this.amount = maxAmount.toNumber();
     this.syncFiatPrice();
   }
@@ -420,18 +420,18 @@ export class SendComponent implements OnInit {
 
     switch (this.selectedAmount.value) {
       default:
-      case 'nano': return this.util.nano.nanoToRaw(value);
-      case 'knano': return this.util.nano.knanoToRaw(value);
-      case 'mnano': return this.util.nano.mnanoToRaw(value);
+      case 'ana': return this.util.ana.anaToRaw(value);
+      case 'kana': return this.util.ana.kanaToRaw(value);
+      case 'mana': return this.util.ana.manaToRaw(value);
     }
   }
 
   getAmountValueFromBase(value) {
     switch (this.selectedAmount.value) {
       default:
-      case 'nano': return this.util.nano.rawToNano(value);
-      case 'knano': return this.util.nano.rawToKnano(value);
-      case 'mnano': return this.util.nano.rawToMnano(value);
+      case 'ana': return this.util.ana.rawToAna(value);
+      case 'kana': return this.util.ana.rawToKana(value);
+      case 'mana': return this.util.ana.rawToMana(value);
     }
   }
 

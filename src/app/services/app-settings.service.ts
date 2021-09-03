@@ -36,7 +36,7 @@ export class AppSettingsService {
 
   settings: AppSettings = {
     language: null,
-    displayDenomination: 'mnano',
+    displayDenomination: 'ana',
     walletStore: 'localStorage',
     displayCurrency: 'USD',
     defaultRepresentative: null,
@@ -188,7 +188,7 @@ export class AppSettingsService {
     localStorage.removeItem(this.storeKey);
     this.settings = {
       language: 'en',
-      displayDenomination: 'mnano',
+      displayDenomination: 'ana',
       // displayPrefix: 'xrb',
       walletStore: 'localStorage',
       displayCurrency: 'USD',

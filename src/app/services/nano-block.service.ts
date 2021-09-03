@@ -402,14 +402,14 @@ export class NanoBlockService {
     if (blockData.contents.type !== 'state') {
       throw new Error(`Frontier block wasn't a state block, which shouldn't be possible`);
     }
-    if (this.util.hex.fromUint8(this.util.nano.hashStateBlock(blockData.contents)) !== accountInfo.frontier) {
+    if (this.util.hex.fromUint8(this.util.ana.hashStateBlock(blockData.contents)) !== accountInfo.frontier) {
       throw new Error(`Frontier hash didn't match block data`);
     }
   }
 
   // Sign a state block, and insert the signature into the block.
   signStateBlock(walletAccount, blockData) {
-    const hashBytes = this.util.nano.hashStateBlock(blockData);
+    const hashBytes = this.util.ana.hashStateBlock(blockData);
     const privKey = walletAccount.keyPair.secretKey;
     const signed = nacl.sign.detached(hashBytes, privKey, walletAccount.keyPair.expanded);
     blockData.signature = this.util.hex.fromUint8(signed);

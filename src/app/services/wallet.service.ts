@@ -131,7 +131,7 @@ export class WalletService {
       console.log('New Transaction', transaction);
       let shouldNotify = false;
       if (this.appSettings.settings.minimumReceive) {
-        const minAmount = this.util.nano.mnanoToRaw(this.appSettings.settings.minimumReceive);
+        const minAmount = this.util.ana.anaToRaw(this.appSettings.settings.minimumReceive);
         if ((new BigNumber(transaction.amount)).gte(minAmount)) {
           shouldNotify = true;
         }
@@ -173,7 +173,7 @@ export class WalletService {
       (this.addressBook.getTransactionTrackingById(transaction.block.link_as_account) ||
       this.addressBook.getTransactionTrackingById(transaction.block.account))) {
         if (shouldNotify || transaction.block.subtype === 'change') {
-          const trackedAmount = this.util.nano.rawToMnano(transaction.amount);
+          const trackedAmount = this.util.ana.rawToAna(transaction.amount);
           // Save hash so we can ignore duplicate messages if subscribing to both send and receive
           if (this.trackedHashes.indexOf(transaction.hash) !== -1) return; // Already notified this block
           this.trackedHashes.push(transaction.hash);
@@ -186,17 +186,17 @@ export class WalletService {
           if (transaction.block.subtype === 'send') {
             // Incoming transaction
             if (this.addressBook.getTransactionTrackingById(addressLink)) {
-              this.notifications.sendInfo(`Tracked address ${accountHrefLink} can now receive ${trackedAmount} NANO`, { length: 10000 });
+              this.notifications.sendInfo(`Tracked address ${accountHrefLink} can now receive ${trackedAmount} ANA`, { length: 10000 });
               console.log(`Tracked incoming block to: ${address} - ${trackedAmount} Nano`);
             }
             // Outgoing transaction
             if (this.addressBook.getTransactionTrackingById(address)) {
-              this.notifications.sendInfo(`Tracked address ${accountHref} sent ${trackedAmount} NANO`, { length: 10000 });
+              this.notifications.sendInfo(`Tracked address ${accountHref} sent ${trackedAmount} ANA`, { length: 10000 });
               console.log(`Tracked send block from: ${address} - ${trackedAmount} Nano`);
             }
           } else if (transaction.block.subtype === 'receive' && this.addressBook.getTransactionTrackingById(address)) {
             // Receive transaction
-            this.notifications.sendInfo(`Tracked address ${accountHref} received incoming ${trackedAmount} NANO`, { length: 10000 });
+            this.notifications.sendInfo(`Tracked address ${accountHref} received incoming ${trackedAmount} ANA`, { length: 10000 });
             console.log(`Tracked receive block to: ${address} - ${trackedAmount} Nano`);
           } else if (transaction.block.subtype === 'change' && this.addressBook.getTransactionTrackingById(address)) {
             // Change transaction
@@ -238,7 +238,7 @@ export class WalletService {
       let aboveMinimumReceive = true;
 
       if (this.appSettings.settings.minimumReceive) {
-        const minAmount = this.util.nano.mnanoToRaw(this.appSettings.settings.minimumReceive);
+        const minAmount = this.util.ana.anaToRaw(this.appSettings.settings.minimumReceive);
         aboveMinimumReceive = txAmount.gte(minAmount);
       }
 
@@ -248,7 +248,7 @@ export class WalletService {
         if (isNewBlock === true) {
           this.wallet.pending = this.wallet.pending.plus(txAmount);
           this.wallet.pendingRaw = this.wallet.pendingRaw.plus(txAmount.mod(this.nano));
-          this.wallet.pendingFiat += this.util.nano.rawToMnano(txAmount).times(this.price.price.lastPrice).toNumber();
+          this.wallet.pendingFiat += this.util.ana.rawToAna(txAmount).times(this.price.price.lastPrice).toNumber();
           this.wallet.hasPending = true;
         }
       }
@@ -656,12 +656,12 @@ export class WalletService {
     const fiatPrice = this.price.price.lastPrice;
 
     this.wallet.accounts.forEach(account => {
-      account.balanceFiat = this.util.nano.rawToMnano(account.balance).times(fiatPrice).toNumber();
-      account.pendingFiat = this.util.nano.rawToMnano(account.pending).times(fiatPrice).toNumber();
+      account.balanceFiat = this.util.ana.rawToAna(account.balance).times(fiatPrice).toNumber();
+      account.pendingFiat = this.util.ana.rawToAna(account.pending).times(fiatPrice).toNumber();
     });
 
-    this.wallet.balanceFiat = this.util.nano.rawToMnano(this.wallet.balance).times(fiatPrice).toNumber();
-    this.wallet.pendingFiat = this.util.nano.rawToMnano(this.wallet.pending).times(fiatPrice).toNumber();
+    this.wallet.balanceFiat = this.util.ana.rawToAna(this.wallet.balance).times(fiatPrice).toNumber();
+    this.wallet.pendingFiat = this.util.ana.rawToAna(this.wallet.pending).times(fiatPrice).toNumber();
   }
 
   resetBalances() {
@@ -715,7 +715,7 @@ export class WalletService {
 
       walletAccount.balanceRaw = new BigNumber(walletAccount.balance).mod(this.nano);
 
-      walletAccount.balanceFiat = this.util.nano.rawToMnano(walletAccount.balance).times(fiatPrice).toNumber();
+      walletAccount.balanceFiat = this.util.ana.rawToAna(walletAccount.balance).times(fiatPrice).toNumber();
 
       walletAccount.frontier = frontiers.frontiers[accountID] || null;
 
@@ -727,7 +727,7 @@ export class WalletService {
       let pending;
 
       if (this.appSettings.settings.minimumReceive) {
-        const minAmount = this.util.nano.mnanoToRaw(this.appSettings.settings.minimumReceive);
+        const minAmount = this.util.ana.anaToRaw(this.appSettings.settings.minimumReceive);
         pending = await this.api.accountsPendingLimitSorted(this.wallet.accounts.map(a => a.id), minAmount.toString(10));
       } else {
         pending = await this.api.accountsPendingSorted(this.wallet.accounts.map(a => a.id));
@@ -765,7 +765,7 @@ export class WalletService {
 
             walletAccount.pending = accountPending;
             walletAccount.pendingRaw = accountPending.mod(this.nano);
-            walletAccount.pendingFiat = this.util.nano.rawToMnano(accountPending).times(fiatPrice).toNumber();
+            walletAccount.pendingFiat = this.util.ana.rawToAna(accountPending).times(fiatPrice).toNumber();
 
             // If there is a pending, it means we want to add to work cache as receive-threshold
             if (walletAccount.pending.gt(0)) {
@@ -815,8 +815,8 @@ export class WalletService {
     this.wallet.balanceRaw = new BigNumber(walletBalance).mod(this.nano);
     this.wallet.pendingRaw = new BigNumber(walletPendingAboveThresholdConfirmed).mod(this.nano);
 
-    this.wallet.balanceFiat = this.util.nano.rawToMnano(walletBalance).times(fiatPrice).toNumber();
-    this.wallet.pendingFiat = this.util.nano.rawToMnano(walletPendingAboveThresholdConfirmed).times(fiatPrice).toNumber();
+    this.wallet.balanceFiat = this.util.ana.rawToAna(walletBalance).times(fiatPrice).toNumber();
+    this.wallet.pendingFiat = this.util.ana.rawToAna(walletPendingAboveThresholdConfirmed).times(fiatPrice).toNumber();
 
     // tslint:disable-next-line
     this.wallet.hasPending = walletPendingAboveThresholdConfirmed.gt(0);
@@ -976,7 +976,7 @@ export class WalletService {
       if (this.successfulBlocks.length >= 15) this.successfulBlocks.shift();
       this.successfulBlocks.push(nextBlock.hash);
 
-      const receiveAmount = this.util.nano.rawToMnano(nextBlock.amount);
+      const receiveAmount = this.util.ana.rawToAna(nextBlock.amount);
       this.notifications.removeNotification('success-receive');
       this.notifications.sendSuccess(`Successfully received ${receiveAmount.isZero() ? '' : receiveAmount.toFixed(6)} Nano!`, { identifier: 'success-receive' });
 
