@@ -328,7 +328,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
           this.pendingBlocks.push({
             account: transaction.source,
             amount: transaction.amount,
-            amountRaw: new BigNumber( transaction.amount || 0 ).mod(this.nano),
+            amountRaw: new BigNumber( transaction.amount || 0 ).shift(28),
             local_timestamp: transaction.local_timestamp,
             local_date_string: (
                 transaction.local_timestamp
@@ -370,8 +370,8 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     }
 
     // Set fiat values?
-    this.account.balanceRaw = new BigNumber(this.account.balance || 0).mod(this.nano);
-    this.account.pendingRaw = new BigNumber(this.account.pending || 0).mod(this.nano);
+    this.account.balanceRaw = new BigNumber(this.account.balance || 0).shift(28);
+    this.account.pendingRaw = new BigNumber(this.account.pending || 0).shift(28);
     this.account.balanceFiat = this.util.ana.rawToAna(this.account.balance || 0).times(this.price.price.lastPrice).toNumber();
     this.account.pendingFiat = this.util.ana.rawToAna(this.account.pending || 0).times(this.price.price.lastPrice).toNumber();
 
@@ -720,9 +720,9 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
   }
 
   setMaxAmount() {
-    this.amountRaw = this.account.balance ? new BigNumber(this.account.balance).mod(this.nano) : new BigNumber(0);
-    const nanoVal = this.util.ana.rawToNano(this.account.balance).floor();
-    const maxAmount = this.getAmountValueFromBase(this.util.ana.nanoToRaw(nanoVal));
+    this.amountRaw = this.account.balance ? new BigNumber(this.account.balance).shift(28) : new BigNumber(0);
+    const nanoVal = this.util.ana.rawToAna(this.account.balance).floor();
+    const maxAmount = this.getAmountValueFromBase(this.util.ana.anaToRaw(nanoVal));
     this.amount = maxAmount.toNumber();
     this.syncFiatPrice();
   }
@@ -811,13 +811,11 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     const rawAmount = this.getAmountBaseValue(this.amount || 0);
     this.rawAmount = rawAmount.plus(this.amountRaw);
 
-    const nanoAmount = this.rawAmount.div(this.nano);
-
     if (this.amount < 0 || rawAmount.lessThan(0)) return this.notifications.sendWarning(`Amount is invalid`);
     if (from.balanceBN.minus(rawAmount).lessThan(0)) return this.notifications.sendError(`From account does not have enough ANA`);
 
     // Determine a proper raw amount to show in the UI, if a decimal was entered
-    this.amountRaw = this.rawAmount.mod(this.nano);
+    this.amountRaw = this.rawAmount.shift(28);
 
     // Determine fiat value of the amount
     this.amountFiat = this.util.ana.rawToAna(rawAmount).times(this.price.price.lastPrice).toNumber();
