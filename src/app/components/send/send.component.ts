@@ -34,8 +34,6 @@ export class SendComponent implements OnInit {
   addressBookMatch = '';
 
   amounts = [
-    { name: 'MANA', shortName: 'mana', value: 'mana' },
-    { name: 'KANA', shortName: 'kana', value: 'kana' },
     { name: 'ANA', shortName: 'ana', value: 'ana' },
   ];
   selectedAmount = this.amounts[0];
@@ -417,22 +415,11 @@ export class SendComponent implements OnInit {
   }
 
   getAmountBaseValue(value) {
-
-    switch (this.selectedAmount.value) {
-      default:
-      case 'ana': return this.util.ana.anaToRaw(value);
-      case 'kana': return this.util.ana.kanaToRaw(value);
-      case 'mana': return this.util.ana.manaToRaw(value);
-    }
+    return this.util.ana.anaToRaw(value);
   }
 
   getAmountValueFromBase(value) {
-    switch (this.selectedAmount.value) {
-      default:
-      case 'ana': return this.util.ana.rawToAna(value);
-      case 'kana': return this.util.ana.rawToKana(value);
-      case 'mana': return this.util.ana.rawToMana(value);
-    }
+    return this.util.ana.rawToAna(value);
   }
 
   // open qr reader modal

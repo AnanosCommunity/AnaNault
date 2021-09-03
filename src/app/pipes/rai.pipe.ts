@@ -15,8 +15,6 @@ export class RaiPipe implements PipeTransform {
     switch (denomination.toLowerCase()) {
       default:
       case 'ana': return `${new BigNumber(value).shift(-28).toFixed(this.precision)}${!hideText ? ' ANA' : ''}`;
-      case 'kana': return `${new BigNumber(value).shift(-31).toFixed(this.precision+3)}${!hideText ? ' ANA' : ''}`;
-      case 'mana': return `${new BigNumber(value).shift(-34).toFixed(this.precision+6)}${!hideText ? ' ANA' : ''}`;
       case 'raw': return `${value}${!hideText ? ' RAW' : ''}`;
       case 'dynamic':
         const raw = new BigNumber(value)
@@ -24,15 +22,9 @@ export class RaiPipe implements PipeTransform {
         if (ana.lessThan(10**(-this.precision))) {
           // raw
           return this.transform(value, "raw,"+hideText);
-        } else if (ana.lessThan(1e3)) {
+        } else {
           // ana
           return this.transform(value, "ana,"+hideText)
-        } else if (ana.lessThan(1e6)) {
-          // ana
-          return this.transform(value, "kana,"+hideText)
-        } else {
-          // mana
-          return this.transform(value, "mana,"+hideText)
         }
     }
   }
