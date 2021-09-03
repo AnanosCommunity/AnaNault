@@ -324,7 +324,7 @@ export class AppComponent implements OnInit {
 
   async updateFiatPrices() {
     const displayCurrency = this.settings.getAppSetting(`displayCurrency`) || 'USD';
-    await this.price.getPrice(displayCurrency);
+    // await this.price.getPrice(displayCurrency);
     this.walletService.reloadFiatBalances();
     setTimeout(() => this.updateFiatPrices(), this.fiatTimeout);
   }

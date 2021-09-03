@@ -22,8 +22,8 @@
                 <span class="amount-fractional">{{ rawAmount | rai: 'ana,true' | amountsplit: 1 }}</span>
                 <span class="currency-name">ANA</span>
               </div>
-              <div style="margin: 8px 0 -1px 0;" class="text-half-muted" *ngIf="settings.settings.displayCurrency && amountFiat !== null">{{ amountFiat | fiat: settings.settings.displayCurrency }}</div>
-              <div style="margin: 1px 0 -1px 0;" class="uk-text-muted" *ngIf="settings.settings.displayCurrency && amountFiat !== null">{{ price.price.lastPrice | fiat: settings.settings.displayCurrency }} / ANA</div>
+              <!--<div style="margin: 8px 0 -1px 0;" class="text-half-muted" *ngIf="settings.settings.displayCurrency && amountFiat !== null">{{ amountFiat | fiat: settings.settings.displayCurrency }}</div>
+              <div style="margin: 1px 0 -1px 0;" class="uk-text-muted" *ngIf="settings.settings.displayCurrency && amountFiat !== null">{{ price.price.lastPrice | fiat: settings.settings.displayCurrency }} / ANA</div>-->
             </div>
           </div>
         </div>

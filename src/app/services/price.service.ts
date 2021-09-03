@@ -14,7 +14,7 @@ export class PriceService {
   lastPrice$ = new BehaviorSubject(1);
 
   constructor(private http: HttpClient) {
-    this.loadSavedPrice();
+    //this.loadSavedPrice();
   }
 
   async getPrice(currency = 'USD') {

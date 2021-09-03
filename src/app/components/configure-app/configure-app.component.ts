@@ -308,7 +308,7 @@ export class ConfigureAppComponent implements OnInit {
 
     if (reloadFiat) {
       // Reload prices with our currency, then call to reload fiat balances.
-      await this.price.getPrice(newCurrency);
+      //await this.price.getPrice(newCurrency);
       this.appSettings.setAppSetting('displayCurrency', newCurrency);
       this.walletService.reloadFiatBalances();
     }
