@@ -129,7 +129,7 @@ export class ConfigureAppComponent implements OnInit {
   selectedPoWOption = "custom";
 
   multiplierOptions = [
-    { name: 'Default (1x or 1/64x)', value: 1 },
+    { name: 'Default (1x)', value: 1 },
     { name: '2x', value: 2 },
     { name: '4x', value: 4 },
     { name: '8x', value: 8 },
@@ -173,7 +173,7 @@ export class ConfigureAppComponent implements OnInit {
   statsRefreshEnabled = true;
   shouldRandom = null;
 
-  customWorkServer = 'https://nault.nanos.cc/proxy';
+  customWorkServer = '';
 
   showServerValues = () => this.selectedServer && this.selectedServer !== 'random' && this.selectedServer !== 'offline';
   showStatValues = () => this.selectedServer && this.selectedServer !== 'offline';

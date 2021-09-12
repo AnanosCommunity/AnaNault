@@ -73,12 +73,9 @@ export class WorkPoolService {
 
     this.currentlyProcessingHashes[hash] = true;
 
-    let work;
-    try {
-      work = await this.pow.getPow(hash, multiplier);
-    } catch (workState) {
-      work = workState;
-    }
+    const work = await this.pow.getPow(hash, multiplier).catch(state => state);
+
+    console.log(work)
 
     if (work.state === workState.error || work.state === workState.cancelled) {
       // Only display notification on error

@@ -294,9 +294,10 @@ export class NanoBlockService {
     }
 
     console.log('Get work for receive block');
-    blockData.work = await this.workPool.getWork(workBlock, 1 / 64); // low PoW threshold since receive block
+    blockData.work = await this.workPool.getWork(workBlock, 1);
     this.notifications.removeNotification('pow');
     const processResponse = await this.api.process(blockData, openEquiv ? TxType.open : TxType.receive);
+    console.log(processResponse)
     if (processResponse && processResponse.hash) {
       walletAccount.frontier = processResponse.hash;
       // Add new hash into the work pool, high PoW threshold since we don't know what the next one will be
