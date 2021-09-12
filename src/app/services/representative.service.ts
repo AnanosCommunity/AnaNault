@@ -443,6 +443,12 @@ export class RepresentativeService {
       online: true,
       warn: false,
       weight: 0
+    },
+    {
+      id: "ana_171u8ift6hysrysxsz6r5tahsuksrdoyg1dth7p833o77s7xh8qq8n4qxnxe",
+      name: "Sqidrod's rep",
+      online: true,
+      warn: false
     }
   ];
 
