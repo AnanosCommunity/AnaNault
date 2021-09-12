@@ -126,7 +126,7 @@ export class ConfigureAppComponent implements OnInit {
     { name: 'External - Selected Server', value: 'server' },
     { name: 'External - Custom Server', value: 'custom' },
   ];
-  selectedPoWOption = this.powOptions[0].value;
+  selectedPoWOption = "custom";
 
   multiplierOptions = [
     { name: 'Default (1x or 1/64x)', value: 1 },
@@ -173,7 +173,7 @@ export class ConfigureAppComponent implements OnInit {
   statsRefreshEnabled = true;
   shouldRandom = null;
 
-  customWorkServer = '';
+  customWorkServer = 'https://nault.nanos.cc/proxy';
 
   showServerValues = () => this.selectedServer && this.selectedServer !== 'random' && this.selectedServer !== 'offline';
   showStatValues = () => this.selectedServer && this.selectedServer !== 'offline';
