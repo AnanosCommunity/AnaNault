@@ -67,7 +67,7 @@ export class RepresentativeService {
   changeableReps$ = new BehaviorSubject([]);
   changeableReps = [];
 
-  onlineStakeTotal = new BigNumber(115202418);
+  onlineStakeTotal = new BigNumber(34028236692);
 
   loaded = false;
 
