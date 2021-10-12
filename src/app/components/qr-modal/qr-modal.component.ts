@@ -71,7 +71,7 @@ export class QrModalComponent implements OnInit {
       type = 'hash';
       content = resultString;
     } else if (this.nano_scheme.test(resultString)) {
-      // This is a valid Nano scheme URI
+      // This is a valid Ananos scheme URI
       const url = new URL(resultString);
       content = url.pathname;
 

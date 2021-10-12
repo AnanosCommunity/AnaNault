@@ -52,7 +52,7 @@ export class MultisigComponent implements OnInit {
   addAccount() {
     if (this.accountAddStatus !== 1) {
       this.notificationService.removeNotification('account-invalid');
-      this.notificationService.sendWarning('Invalid Nano address!', {identifier: 'account-invalid'});
+      this.notificationService.sendWarning('Invalid Ananos address!', {identifier: 'account-invalid'});
       return;
     }
     if (this.storedAccounts.includes(this.accountAdd.toLocaleLowerCase())) {
@@ -119,7 +119,7 @@ export class MultisigComponent implements OnInit {
       return false;
     }
     let url = null;
-    if (string.startsWith('nanosign:')) {
+    if (string.startsWith('anasign:')) {
       url = new URL(string);
     }
     if (url && this.remoteSignService.checkSignBlock(url.pathname)) {
@@ -133,18 +133,18 @@ export class MultisigComponent implements OnInit {
     if (this.validateMultisig()) {
       this.router.navigate(['account', this.multisigAccount], { queryParams: {sign: 1}});
     } else {
-      this.notificationService.sendWarning('Invalid Nano account!');
+      this.notificationService.sendWarning('Invalid Ananos account!');
     }
   }
 
   navigateBlock(block) {
     let badScheme = false;
 
-    if (block.startsWith('nanosign:') || block.startsWith('nanoprocess:')) {
+    if (block.startsWith('anasign:') || block.startsWith('anaprocess:')) {
       const url = new URL(block);
-      if (url.protocol === 'nanosign:') {
+      if (url.protocol === 'anasign:') {
         this.remoteSignService.navigateSignBlock(url);
-      } else if (url.protocol === 'nanoprocess:') {
+      } else if (url.protocol === 'anaprocess:') {
         this.remoteSignService.navigateProcessBlock(url);
       } else {
         badScheme = true;

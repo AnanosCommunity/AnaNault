@@ -95,7 +95,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
   blockHash = null;
   blockHashReceive = null;
   remoteVisible = false;
-  blockTypes: string[] = ['Send Nano', 'Change Representative'];
+  blockTypes: string[] = ['Send Ananos', 'Change Representative'];
   blockTypeSelected: string = this.blockTypes[0];
   representativeList = [];
   representativesOverview = [];
@@ -763,7 +763,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
       receivableBlock.received = true;
       this.mobileTransactionMenuModal.hide();
       this.notifications.removeNotification('success-receive');
-      this.notifications.sendSuccess(`Successfully received Nano!`, { identifier: 'success-receive' });
+      this.notifications.sendSuccess(`Successfully received Ananos!`, { identifier: 'success-receive' });
       // clear the list of pending blocks. Updated again with reloadBalances()
       this.wallet.clearPendingBlocks();
     } else {
@@ -843,7 +843,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     };
 
     // Nano signing standard
-    this.qrString = 'nanosign:{"block":' + JSON.stringify(blockData) + ',"previous":' + JSON.stringify(blockDataPrevious) + '}';
+    this.qrString = 'anasign:{"block":' + JSON.stringify(blockData) + ',"previous":' + JSON.stringify(blockDataPrevious) + '}';
     const qrCode = await QRCode.toDataURL(this.qrString, { errorCorrectionLevel: 'L', scale: 16 });
     this.qrCodeImageBlock = qrCode;
   }
@@ -917,7 +917,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     }
 
     // Nano signing standard
-    this.qrString = 'nanosign:' + JSON.stringify(qrData);
+    this.qrString = 'anasign:' + JSON.stringify(qrData);
 
     const qrCode = await QRCode.toDataURL(this.qrString, { errorCorrectionLevel: 'L', scale: 16 });
     this.qrCodeImageBlockReceive = qrCode;
@@ -968,7 +968,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     };
 
     // Nano signing standard
-    this.qrString = 'nanosign:{"block":' + JSON.stringify(blockData) + ',"previous":' + JSON.stringify(blockDataPrevious) + '}';
+    this.qrString = 'anasign:{"block":' + JSON.stringify(blockData) + ',"previous":' + JSON.stringify(blockDataPrevious) + '}';
     const qrCode = await QRCode.toDataURL(this.qrString, { errorCorrectionLevel: 'L', scale: 16 });
     this.qrCodeImageBlock = qrCode;
   }

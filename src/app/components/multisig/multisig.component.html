@@ -12,7 +12,7 @@
             </p>
 
             <h4>1 - Create a Multisig Address</h4>
-            <p>Add 2 or more Nano addresses to form a new multisig address.<br>
+            <p>Add 2 or more Ananos addresses to form a new multisig address.<br>
             If you (or the participants) don't have any, they can be generated with the <a routerLink="/keygenerator" class="name">Keypair Generator</a> and stored safely.
             </p>
             <div>
@@ -144,7 +144,7 @@
                 <label class="uk-form-label" for="form-horizontal-text2">Signing Data</label>
                 <div class="uk-form-controls">
                   <div class="uk-inline uk-width-1-1">
-                    <input (input)="validateUnsigned(unsignedBlock)" (keyup.enter)="navigateBlock(unsignedBlock)" [(ngModel)]="unsignedBlock" class="uk-input" [ngClass]="{ 'uk-form-success': unsignedStatus === 1, 'uk-form-danger': unsignedStatus === 0 }" type="text" placeholder="nanosign:{abc..}" autocomplete="off">
+                    <input (input)="validateUnsigned(unsignedBlock)" (keyup.enter)="navigateBlock(unsignedBlock)" [(ngModel)]="unsignedBlock" class="uk-input" [ngClass]="{ 'uk-form-success': unsignedStatus === 1, 'uk-form-danger': unsignedStatus === 0 }" type="text" placeholder="anasign:{abc..}" autocomplete="off">
                   </div>
                 </div>
               </div>

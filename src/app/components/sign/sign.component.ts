@@ -537,10 +537,10 @@ export class SignComponent implements OnInit {
         this.clean(this.previousBlock);
       }
       if (this.previousBlock) {
-        this.qrString = 'nanoprocess:{"block":' + JSON.stringify(block) +
+        this.qrString = 'anaprocess:{"block":' + JSON.stringify(block) +
         ',"previous":' + JSON.stringify(this.previousBlock) + '}';
       } else {
-        this.qrString = 'nanoprocess:{"block":' + JSON.stringify(block) + '}';
+        this.qrString = 'anaprocess:{"block":' + JSON.stringify(block) + '}';
       }
 
       const qrCode = await QRCode.toDataURL(this.qrString, { errorCorrectionLevel: 'L', scale: 16 });
@@ -952,7 +952,7 @@ export class SignComponent implements OnInit {
 
   // generate shared data to be sent to other participants
   getMultisigLink() {
-    return 'nanosign:{"block":' + JSON.stringify(this.currentBlock) +
+    return 'anasign:{"block":' + JSON.stringify(this.currentBlock) +
     ',"previous":' + JSON.stringify(this.previousBlock) +  ',"participants":' + this.participants + '}';
   }
 
@@ -1058,7 +1058,7 @@ export class SignComponent implements OnInit {
 
   multiSign() {
     const result = this.musigService.runMultiSign(this.privateKey, this.blockHash, this.inputMultisigData);
-    // used for validation when the final Nano block is created
+    // used for validation when the final Ananos block is created
     if (result && result.multisig !== '') {
       this.multisigAccount = result.multisig;
     }

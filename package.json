@@ -141,18 +141,18 @@
       "target": "AppImage",
       "icon": "desktop-app/assets/linux",
       "desktop": {
-        "GenericName": "Nano Wallet"
+        "GenericName": "Ananos Wallet"
       }
     },
     "protocols": {
       "name": "nano",
       "schemes": [
-        "nano",
-        "nanorep",
-        "nanoseed",
-        "nanokey",
-        "nanosign",
-        "nanoprocess"
+        "ana",
+        "anarep",
+        "anaseed",
+        "anakey",
+        "anasign",
+        "anaprocess"
       ],
       "role": "Viewer"
     }

@@ -28,7 +28,7 @@ export class DeeplinkService {
       this.handleSeed(deeplink);
 
     } else if (nano_scheme.test(deeplink)) {
-      // This is a valid Nano scheme URI
+      // This is a valid Ananos scheme URI
       const url = new URL(deeplink);
 
       // check if deeplink contains a full URL path

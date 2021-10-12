@@ -340,7 +340,7 @@ export class ConfigureAppComponent implements OnInit {
     if (resaveWallet && newStorage === this.storageOptions[1].value) {
       const UIkit = window['UIkit'];
       try {
-        await UIkit.modal.confirm('<p class="uk-alert uk-alert-danger"><br><span class="uk-flex"><span uk-icon="icon: warning; ratio: 3;" class="uk-align-center"></span></span><span style="font-size: 18px;">You are about to <b>disable storage of all wallet data, which means there will be no wallet configured next time you use AnaNault</b>.</span><br><br><b style="font-size: 18px;">Before continuing, make sure you have saved the Nano seed and/or mnemonic of your current wallet</b>.<br><br><span style="font-size: 18px;"><b>YOU WILL NOT BE ABLE TO RECOVER THE FUNDS</b><br>without a backup of your currently configured wallet.</span></p><br>');
+        await UIkit.modal.confirm('<p class="uk-alert uk-alert-danger"><br><span class="uk-flex"><span uk-icon="icon: warning; ratio: 3;" class="uk-align-center"></span></span><span style="font-size: 18px;">You are about to <b>disable storage of all wallet data, which means there will be no wallet configured next time you use AnaNault</b>.</span><br><br><b style="font-size: 18px;">Before continuing, make sure you have saved the Ananos seed and/or mnemonic of your current wallet</b>.<br><br><span style="font-size: 18px;"><b>YOU WILL NOT BE ABLE TO RECOVER THE FUNDS</b><br>without a backup of your currently configured wallet.</span></p><br>');
       } catch (err) {
         // pressing cancel, reset storage setting and interrupt
         this.selectedStorage = this.storageOptions[0].value;
@@ -577,7 +577,7 @@ export class ConfigureAppComponent implements OnInit {
   async clearWalletData() {
     const UIkit = window['UIkit'];
     try {
-      await UIkit.modal.confirm('<p class="uk-alert uk-alert-danger"><br><span class="uk-flex"><span uk-icon="icon: warning; ratio: 3;" class="uk-align-center"></span></span><span style="font-size: 18px;">You are about to <b>delete all locally stored data about your currently configured wallet</b>.</span><br><br><b style="font-size: 18px;">Before continuing, make sure you have saved the Nano seed and/or mnemonic of your current wallet</b>.<br><br><span style="font-size: 18px;"><b>YOU WILL NOT BE ABLE TO RECOVER THE FUNDS</b><br>without a backup of your currently configured wallet.</span></p><br>');
+      await UIkit.modal.confirm('<p class="uk-alert uk-alert-danger"><br><span class="uk-flex"><span uk-icon="icon: warning; ratio: 3;" class="uk-align-center"></span></span><span style="font-size: 18px;">You are about to <b>delete all locally stored data about your currently configured wallet</b>.</span><br><br><b style="font-size: 18px;">Before continuing, make sure you have saved the Ananos seed and/or mnemonic of your current wallet</b>.<br><br><span style="font-size: 18px;"><b>YOU WILL NOT BE ABLE TO RECOVER THE FUNDS</b><br>without a backup of your currently configured wallet.</span></p><br>');
       this.walletService.resetWallet();
       this.walletService.removeWalletData();
 
@@ -588,7 +588,7 @@ export class ConfigureAppComponent implements OnInit {
   async clearAllData() {
     const UIkit = window['UIkit'];
     try {
-      await UIkit.modal.confirm('<p class="uk-alert uk-alert-danger"><br><span class="uk-flex"><span uk-icon="icon: warning; ratio: 3;" class="uk-align-center"></span></span><span style="font-size: 18px;">You are about to delete all data stored in AnaNault, <b>which includes all locally stored data about your currently configured wallet, all entries from your address and representative books, and any other cached data. All settings will be reset to default</b>.</span><br><br><b style="font-size: 18px;">Before continuing, make sure you have saved the Nano seed and/or mnemonic of your current wallet</b>.<br><br><span style="font-size: 18px;"><b>YOU WILL NOT BE ABLE TO RECOVER THE FUNDS</b><br>without a backup of your currently configured wallet.</span></p><br>');
+      await UIkit.modal.confirm('<p class="uk-alert uk-alert-danger"><br><span class="uk-flex"><span uk-icon="icon: warning; ratio: 3;" class="uk-align-center"></span></span><span style="font-size: 18px;">You are about to delete all data stored in AnaNault, <b>which includes all locally stored data about your currently configured wallet, all entries from your address and representative books, and any other cached data. All settings will be reset to default</b>.</span><br><br><b style="font-size: 18px;">Before continuing, make sure you have saved the Ananos seed and/or mnemonic of your current wallet</b>.<br><br><span style="font-size: 18px;"><b>YOU WILL NOT BE ABLE TO RECOVER THE FUNDS</b><br>without a backup of your currently configured wallet.</span></p><br>');
       this.walletService.resetWallet();
       this.walletService.removeWalletData();
 
