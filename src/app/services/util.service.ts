@@ -361,7 +361,7 @@ function manaToRaw(value){
   return new BigNumber(value).shift(34);
 }
 function rawToAna(value){
-  return new BigNumber(value).shift(-18);
+  return new BigNumber(value).shift(-28);
 }
 function rawToKana(value){
   return new BigNumber(value).shift(-31);
