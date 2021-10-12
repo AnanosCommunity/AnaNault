@@ -126,10 +126,10 @@ export class ConfigureAppComponent implements OnInit {
     { name: 'External - Selected Server', value: 'server' },
     { name: 'External - Custom Server', value: 'custom' },
   ];
-  selectedPoWOption = this.powOptions[0].value;
+  selectedPoWOption = "custom";
 
   multiplierOptions = [
-    { name: 'Default (1x or 1/64x)', value: 1 },
+    { name: 'Default (1x)', value: 1 },
     { name: '2x', value: 2 },
     { name: '4x', value: 4 },
     { name: '8x', value: 8 },

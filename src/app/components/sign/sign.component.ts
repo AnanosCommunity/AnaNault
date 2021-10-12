@@ -565,11 +565,8 @@ export class SignComponent implements OnInit {
         this.notificationService.sendInfo(`Generating Proof of Work...`, { identifier: 'pow', length: 0 });
       }
 
-      if (this.txType === TxType.receive || this.txType === TxType.open) {
-        this.currentBlock.work = await this.workPool.getWork(workBlock, 1 / 64);
-      } else {
-        this.currentBlock.work = await this.workPool.getWork(workBlock, 1);
-      }
+      this.currentBlock.work = await this.workPool.getWork(workBlock, 1);
+      
       this.notificationService.removeNotification('pow');
 
       this.workPool.removeFromCache(workBlock);

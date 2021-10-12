@@ -776,7 +776,7 @@ export class WalletService {
               // a send or change block is made it's safer to use 1x PoW threshold to be sure the cache will work.
               // On the other hand, it may be more efficient to use 1/64 and simply let the work cache rework
               // in case a send is made instead. The typical user scenario would be to let the wallet auto receive first
-              this.workPool.addWorkToCache(hash, 1 / 64);
+              this.workPool.addWorkToCache(hash, 1);
               walletAccount.receivePow = true;
             } else {
               walletAccount.receivePow = false;
