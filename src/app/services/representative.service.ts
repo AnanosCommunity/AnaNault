@@ -473,6 +473,12 @@ export class RepresentativeService {
       name: "Drelor",
       online: true,
       warn: false
+    },
+    {
+      id: "ana_3ana1hdprmgo3zcjkksmhysgsnj9q61pocuwb45qqp8d5sny1xk5pobzm4w5",
+      name: "Anal",
+      online: true,
+      warn: false
     }
   ];
 
