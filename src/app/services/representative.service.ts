@@ -449,6 +449,24 @@ export class RepresentativeService {
       name: "Sqidrod's rep",
       online: true,
       warn: false
+    },
+    {
+      id: "ana_1poopstarqe9p5k8mfzxdqktohh5nwhanwn96dezjk41qjckwymtuz3aeszj",
+      name: "Poopstar of Swedistan",
+      online: true,
+      warn: false
+    },
+    {
+      id: "ana_1rsb7x731cpiqnp7j48wkj5qcqcb4e4f1s51w3m5ygnrk6ckgpyyn8ajh9f6",
+      name: "Baby Lynx",
+      online: true,
+      warn: false
+    },
+    {
+      id: "ana_1dre1orfwfn43spbpohpjbgnt6artwjiycpa1q5zc1k5exc9rg4hp4h4uybg",
+      name: "Drelor",
+      online: true,
+      warn: false
     }
   ];
 
