@@ -479,6 +479,12 @@ export class RepresentativeService {
       name: "Anal",
       online: true,
       warn: false
+    },
+    {
+      id: "ana_3wo14fw3yfqi6z1oiyy8ykurgactjaw8uorye4s15bhmwix7imota8a76djg ",
+      name: "validierung.cc 🇩🇪 / Augsburg",
+      online: true,
+      warn: false
     }
   ];
 
