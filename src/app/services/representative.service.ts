@@ -445,6 +445,12 @@ export class RepresentativeService {
       weight: 0
     },
     {
+      id: "ana_15khotf85d6tcewx5hmts35qt7n576wfer16ggdgs39ipjz7wxerq16jocfy",
+      name: "Ananos Official Second Rep",
+      online: true,
+      warn: false
+    },
+    {
       id: "ana_171u8ift6hysrysxsz6r5tahsuksrdoyg1dth7p833o77s7xh8qq8n4qxnxe",
       name: "Sqidrod's rep",
       online: true,
