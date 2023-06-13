@@ -122,10 +122,10 @@ export class RepresentativeService {
     const uniqueReps = this.getUniqueRepresentatives(accounts);
     const representatives = await this.getRepresentativesDetails(uniqueReps);
     const onlineReps = await this.getOnlineRepresentatives();
-    const quorum = await this.api.confirmationQuorum();
+    //const quorum = await this.api.confirmationQuorum();
 
-    const online_stake_total = quorum ? this.util.ana.rawToAna(quorum.online_stake_total) : null;
-    this.onlineStakeTotal = online_stake_total ? new BigNumber(online_stake_total) : null;
+    //const online_stake_total = quorum ? this.util.ana.rawToAna(quorum.online_stake_total) : null;
+    //this.onlineStakeTotal = online_stake_total ? new BigNumber(online_stake_total) : null;
 
     const allReps = [];
 
